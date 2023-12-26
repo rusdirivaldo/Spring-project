@@ -1,15 +1,26 @@
 package com.appdev.app.ws.uicontroller;
 
 
+import com.appdev.app.ws.model.response.UserRest;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
 
 @RestController
 @RequestMapping("/users")
 public class UiController {
 
-    @GetMapping ("/{userId}")
-    public String getUser (@PathVariable("userId") String id){
-        return "Success get user with id "+id;
+    @GetMapping (path="/{userId}", produces = {
+            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE
+    })
+    public UserRest getUser (@PathVariable("userId") String id){
+        UserRest userRest = new UserRest();
+        userRest.setFirstName("rusdi");
+        userRest.setLastName("rivaldo");
+        userRest.setEmail("email@email.com");
+        userRest.setUserid(id);
+        return userRest;
     }
 
     @PostMapping
@@ -25,4 +36,6 @@ public class UiController {
     public String deleteUser(){
         return "Success Delete User";
     }
+
+
 }
